@@ -64,7 +64,8 @@
 								<span class="skill">React</span>
 								<span class="skill">Node.js</span>
 								<span class="skill">Python</span>
-								<span class="skill">Astro</span>
+								<span class="skill">Tailwind CSS</span>
+								<span class="skill">Next.js</span>
 							</div>
 						</div>
 					</div>
@@ -79,21 +80,28 @@
 				<div class="projects-grid">
 					<article class="project-card">
 						<div class="project-image">
-							<div class="project-placeholder">Project Image</div>
+							<a href="https://scravi.com" target="_blank" class="project-image-link">
+								<img src="/scravi-screenshot.jpg" alt="Scravi Desktop App Screenshot" class="project-screenshot" />
+							</a>
 						</div>
 						<div class="project-content">
-							<h3 class="project-title">Project One</h3>
+							<h3 class="project-title">Scravi</h3>
 							<p class="project-description">
-								A modern web application built with React and Node.js featuring real-time updates and responsive design.
+								A powerful Electron desktop application for scraping Google Maps data. Features automated data extraction, 
+								export functionality, and an intuitive user interface for business research and lead generation.
 							</p>
 							<div class="project-tech">
-								<span class="tech-tag">React</span>
+								<span class="tech-tag">TypeScript</span>
+								<span class="tech-tag">Electron</span>
 								<span class="tech-tag">Node.js</span>
-								<span class="tech-tag">MongoDB</span>
+								<span class="tech-tag">Web Scraping</span>
+								<span class="tech-tag">Playwright</span>
+								<span class="tech-tag">Google Maps API</span>
+								<span class="tech-tag">Tailwind CSS</span>
 							</div>
 							<div class="project-links">
-								<a href="#" class="project-link">Live Demo</a>
-								<a href="#" class="project-link">GitHub</a>
+								<button class="project-link video-trigger" data-video="T9jEKxa3ArY">Demo Video</button>
+								<a href="https://github.com/SilasRopp1012/scravi-web-scraper" class="project-link" target="_blank">GitHub</a>
 							</div>
 						</div>
 					</article>
@@ -176,6 +184,16 @@
 				<p>&copy; 2024 Silas Ropp. Built with Astro.</p>
 			</div>
 		</footer>
+
+		<!-- Video Modal -->
+		<div id="video-modal" class="video-modal">
+			<div class="video-modal-content">
+				<span class="video-close">&times;</span>
+				<div class="video-container">
+					<iframe id="video-iframe" src="" frameborder="0" allowfullscreen></iframe>
+				</div>
+			</div>
+		</div>
 
 		<style>
 			/* Reset and Base Styles */
@@ -426,6 +444,25 @@
 				display: flex;
 				align-items: center;
 				justify-content: center;
+				overflow: hidden;
+			}
+
+			.project-image-link {
+				width: 100%;
+				height: 100%;
+				display: block;
+				transition: transform 0.3s ease;
+			}
+
+			.project-image-link:hover {
+				transform: scale(1.05);
+			}
+
+			.project-screenshot {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				transition: transform 0.3s ease;
 			}
 
 			.project-placeholder {
@@ -530,7 +567,76 @@
 				padding: 2rem 0;
 			}
 
-			/* Responsive Design */
+			/* Video Modal Styles */
+			.video-modal {
+				display: none;
+				position: fixed;
+				z-index: 2000;
+				left: 0;
+				top: 0;
+				width: 100%;
+				height: 100%;
+				background-color: rgba(0, 0, 0, 0.8);
+				backdrop-filter: blur(5px);
+			}
+
+			.video-modal-content {
+				position: relative;
+				margin: 5% auto;
+				width: 90%;
+				max-width: 900px;
+				background: #fff;
+				border-radius: 1rem;
+				overflow: hidden;
+				box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+			}
+
+			.video-close {
+				position: absolute;
+				top: 10px;
+				right: 20px;
+				color: #fff;
+				font-size: 2rem;
+				font-weight: bold;
+				cursor: pointer;
+				z-index: 2001;
+				background: rgba(0, 0, 0, 0.5);
+				border-radius: 50%;
+				width: 40px;
+				height: 40px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: background-color 0.3s ease;
+			}
+
+			.video-close:hover {
+				background: rgba(0, 0, 0, 0.8);
+			}
+
+			.video-container {
+				position: relative;
+				width: 100%;
+				height: 0;
+				padding-bottom: 56.25%; /* 16:9 aspect ratio */
+			}
+
+			.video-container iframe {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+			}
+
+			.video-trigger {
+				background: none;
+				border: none;
+				cursor: pointer;
+				font: inherit;
+			}
+
+			/* Responsive */
 			@media (max-width: 768px) {
 				.nav-container {
 					padding: 1rem;
@@ -574,6 +680,11 @@
 
 				section {
 					padding: 3rem 0;
+				}
+
+				.video-modal-content {
+					margin: 10% auto;
+					width: 95%;
 				}
 			}
 
@@ -636,6 +747,51 @@
 				}
 
 				window.addEventListener('scroll', updateActiveNav);
+			});
+
+			// Video Modal Functionality
+			document.addEventListener('DOMContentLoaded', function() {
+				const videoModal = document.getElementById('video-modal');
+				const videoIframe = document.getElementById('video-iframe');
+				const videoTrigger = document.querySelector('.video-trigger');
+				const videoClose = document.querySelector('.video-close');
+
+				// Open video modal
+				if (videoTrigger) {
+					videoTrigger.addEventListener('click', function() {
+						const videoId = this.getAttribute('data-video');
+						if (videoId) {
+							videoIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
+							videoModal.style.display = 'block';
+							document.body.style.overflow = 'hidden'; // Prevent background scrolling
+						}
+					});
+				}
+
+				// Close video modal
+				function closeVideo() {
+					videoModal.style.display = 'none';
+					videoIframe.src = ''; // Stop video playback
+					document.body.style.overflow = 'auto'; // Restore scrolling
+				}
+
+				if (videoClose) {
+					videoClose.addEventListener('click', closeVideo);
+				}
+
+				// Close on background click
+				videoModal.addEventListener('click', function(e) {
+					if (e.target === videoModal) {
+						closeVideo();
+					}
+				});
+
+				// Close on Escape key
+				document.addEventListener('keydown', function(e) {
+					if (e.key === 'Escape' && videoModal.style.display === 'block') {
+						closeVideo();
+					}
+				});
 			});
 		</script>
 	</body>
