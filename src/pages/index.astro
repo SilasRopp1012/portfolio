@@ -110,8 +110,10 @@
 					</article>
 
 					<article class="project-card">
-						<div class="project-image">
-							<div class="project-placeholder">Inbox Summarizer Screenshot</div>
+						<div class="project-image inbox-image">
+							<a href="https://inboxsummarizer.com" target="_blank" class="project-image-link">
+								<img src="/inbox-screenshot.jpg" alt="Inbox Summarizer App Screenshot" class="project-screenshot" />
+							</a>
 						</div>
 						<div class="project-content">
 							<h3 class="project-title">Inbox Summarizer - AI Powered Email Brief Tool</h3>
@@ -461,6 +463,12 @@
 				box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 			}
 
+			/* Specific styling for inbox image only */
+			.inbox-image {
+				height: 400px;
+			}
+
+			/* Keep default size for other project images */
 			.project-image {
 				height: 200px;
 				background-color: #f0f0f0;
@@ -468,6 +476,11 @@
 				align-items: center;
 				justify-content: center;
 				overflow: hidden;
+			}
+
+			/* Zoom the inbox image within the same container */
+			.project-image.inbox-image .project-screenshot {
+				transform: scale(1.5);
 			}
 
 			.project-image-link {
