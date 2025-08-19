@@ -27,18 +27,18 @@
 		<!-- Hero Section -->
 		<section class="hero">
 			<div class="hero-content">
-				<div class="hero-image">
+				<div class="hero-image" id="hero-image" style="opacity: 0; transform: scale(0.8);">
 					<img src="/profile.jpg" alt="Silas Ropp" class="profile-img" />
 				</div>
 				<div class="hero-text">
 					<h1 class="hero-title">
-						Hi, I'm <span class="highlight">Silas</span>
+						<span id="typing-text"></span><span class="cursor">|</span>
 					</h1>
-					<p class="hero-subtitle">Full Stack Developer</p>
-					<p class="hero-description">
+					<p class="hero-subtitle" id="subtitle" style="opacity: 0;">Full Stack Developer</p>
+					<p class="hero-description" id="description" style="opacity: 0;">
 						I build modern applications with clean code and intuitive user experiences.
 					</p>
-					<div class="hero-buttons">
+					<div class="hero-buttons" id="hero-buttons" style="opacity: 0;">
 						<a href="#projects" class="btn btn-primary">View My Work</a>
 						<a href="#contact" class="btn btn-secondary">Get In Touch</a>
 					</div>
@@ -54,7 +54,7 @@
 					<div class="about-text">
 						<p>
 							I'm a passionate full stack developer with expertise in modern web technologies. 
-							I love creating efficient, scalable solutions and bringing ideas to life through code.
+							I enjoy creating efficient, scalable solutions and bringing ideas to life through code.
 						</p>
 						<p>
 							Outside of tech I enjoy staying active, spending time outdoors, and traveling the world!
@@ -66,9 +66,9 @@
 								<span class="skill">TypeScript</span>
 								<span class="skill">React</span>
 								<span class="skill">Node.js</span>
-								<span class="skill">Python</span>
 								<span class="skill">Tailwind CSS</span>
 								<span class="skill">Next.js</span>
+								<span class="skill">PostgreSQL</span>
 							</div>
 						</div>
 					</div>
@@ -111,21 +111,24 @@
 
 					<article class="project-card">
 						<div class="project-image">
-							<div class="project-placeholder">Project Image</div>
+							<div class="project-placeholder">Inbox Summarizer Screenshot</div>
 						</div>
 						<div class="project-content">
-							<h3 class="project-title">Project Two</h3>
+							<h3 class="project-title">Inbox Summarizer - AI Powered Email Brief Tool</h3>
 							<p class="project-description">
-								An innovative mobile-first application with advanced data visualization and user analytics.
+								A Next.js web application that processes Gmail data through the Gmail API and generates AI-powered daily inbox briefs. 
+								Implements Google OAuth 2.0 for secure authentication and integrates with OpenAI's API for summarization.
 							</p>
 							<div class="project-tech">
-								<span class="tech-tag">TypeScript</span>
 								<span class="tech-tag">Next.js</span>
-								<span class="tech-tag">PostgreSQL</span>
+								<span class="tech-tag">TypeScript</span>
+								<span class="tech-tag">Gmail API</span>
+								<span class="tech-tag">OpenAI API</span>
+								<span class="tech-tag">Google OAuth 2.0</span>
 							</div>
 							<div class="project-links">
-								<a href="#" class="project-link">Live Demo</a>
-								<a href="#" class="project-link">GitHub</a>
+								<a href="#" class="project-link">Demo Video</a>
+								<a href="https://github.com/SilasRopp1012/inbox-summarizer" class="project-link" target="_blank">GitHub</a>
 							</div>
 						</div>
 					</article>
@@ -283,8 +286,25 @@
 
 			.hero-image {
 				flex-shrink: 0;
+				transition: opacity 1s ease-out, transform 1s ease-out;
 			}
 
+			.image-animate {
+				animation: imageSlideIn 1.2s ease-out forwards;
+			}
+
+			@keyframes imageSlideIn {
+				from {
+					opacity: 0;
+					transform: translateX(-100px);
+				}
+				to {
+					opacity: 1;
+					transform: translateX(0);
+				}
+			}
+
+			/* Enhanced profile image hover effect */
 			.profile-img {
 				width: 300px;
 				height: 300px;
@@ -701,9 +721,90 @@
 				outline: 2px solid #007acc;
 				outline-offset: 2px;
 			}
+
+			/* Typewriter Animation Styles */
+			.cursor {
+				animation: blink 1s infinite;
+				color: #007acc;
+				font-weight: normal;
+			}
+
+			@keyframes blink {
+				0%, 50% { opacity: 1; }
+				51%, 100% { opacity: 0; }
+			}
+
+			.fade-in {
+				animation: fadeInUp 0.8s ease-out forwards;
+			}
+
+			@keyframes fadeInUp {
+				from {
+					opacity: 0;
+					transform: translateY(20px);
+				}
+				to {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
+
+			/* Ensure smooth transitions */
+			#subtitle, #description, #hero-buttons {
+				transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+			}
 		</style>
 
 		<script>
+			// Typewriter Effect with Image Animation
+			document.addEventListener('DOMContentLoaded', function() {
+				const text = "Hi, I'm Silas";
+				const typingElement = document.getElementById('typing-text');
+				const heroImage = document.getElementById('hero-image');
+				const subtitle = document.getElementById('subtitle');
+				const description = document.getElementById('description');
+				const heroButtons = document.getElementById('hero-buttons');
+				
+				let index = 0;
+				
+				// Start image animation immediately
+				setTimeout(() => {
+					heroImage.style.opacity = '1';
+					heroImage.style.transform = 'translateX(0)';
+					heroImage.classList.add('image-animate');
+				}, 200);
+				
+				function typeWriter() {
+					if (index < text.length) {
+						typingElement.textContent += text.charAt(index);
+						index++;
+						
+						// Vary typing speed for more natural feel
+						const speed = Math.random() * 100 + 50; // 50-150ms
+						setTimeout(typeWriter, speed);
+					} else {
+						// After typing is complete, show other elements
+						setTimeout(() => {
+							subtitle.style.opacity = '1';
+							subtitle.classList.add('fade-in');
+							
+							setTimeout(() => {
+								description.style.opacity = '1';
+								description.classList.add('fade-in');
+								
+								setTimeout(() => {
+									heroButtons.style.opacity = '1';
+									heroButtons.classList.add('fade-in');
+								}, 400);
+							}, 300);
+						}, 500);
+					}
+				}
+				
+				// Start typing effect after a brief delay
+				setTimeout(typeWriter, 1000);
+			});
+
 			// Smooth scrolling for navigation links
 			document.addEventListener('DOMContentLoaded', function() {
 				const navLinks = document.querySelectorAll('a[href^="#"]');
