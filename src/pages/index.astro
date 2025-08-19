@@ -101,6 +101,7 @@
 								<span class="tech-tag">Playwright</span>
 								<span class="tech-tag">Google Maps API</span>
 								<span class="tech-tag">Tailwind CSS</span>
+								<span class="tech-tag">Python</span>
 							</div>
 							<div class="project-links">
 								<button class="project-link video-trigger" data-video="T9jEKxa3ArY">Demo Video</button>
@@ -136,25 +137,32 @@
 					</article>
 
 					<article class="project-card">
-						<div class="project-image">
-							<div class="project-placeholder">Project Image</div>
+						<div class="project-image security-image">
+							<a href="https://sea-lion.netlify.app/" target="_blank" class="project-image-link">
+								<img src="/security-screenshot.jpg" alt="SeaLion Security Scanner Screenshot" class="project-screenshot" />
+							</a>
 						</div>
 						<div class="project-content">
-							<h3 class="project-title">Project Three</h3>
+							<h3 class="project-title">Web Security Scanner</h3>
 							<p class="project-description">
-								A full-stack e-commerce solution with payment integration and inventory management.
+								Full-stack security scanner with Next.js/React frontend and FastAPI Python backend. Features entropy-based secret detection, 
+								database misconfiguration analysis for Firebase/Supabase, basic http security headers detection, and dynamic API endpoint discovery with async concurrent scanning.
 							</p>
 							<div class="project-tech">
+								<span class="tech-tag">Next.js</span>
+								<span class="tech-tag">React</span>
+								<span class="tech-tag">TypeScript</span>
+								<span class="tech-tag">FastAPI</span>
 								<span class="tech-tag">Python</span>
-								<span class="tech-tag">Django</span>
-								<span class="tech-tag">Redis</span>
+								<span class="tech-tag">Tailwind CSS</span>
 							</div>
 							<div class="project-links">
-								<a href="#" class="project-link">Live Demo</a>
-								<a href="#" class="project-link">GitHub</a>
+								<a href="https://youtu.be/0h8rHrOByX8" class="project-link" target="_blank">Demo Video</a>
+								<a href="https://github.com/SilasRopp1012/sealion" class="project-link" target="_blank">GitHub</a>
 							</div>
 						</div>
 					</article>
+
 				</div>
 			</div>
 		</section>
@@ -480,6 +488,11 @@
 
 			/* Zoom the inbox image within the same container */
 			.project-image.inbox-image .project-screenshot {
+				transform: scale(1.5);
+			}
+
+			/* Zoom the security image within the same container */
+			.project-image.security-image .project-screenshot {
 				transform: scale(1.5);
 			}
 
