@@ -134,7 +134,7 @@
 								<span class="tech-tag">GCP</span>
 							</div>
 							<div class="project-links">
-								<a href="https://youtu.be/MRDhIeUwsvU" class="project-link" target="_blank">Demo Video</a>
+								<button class="project-link video-trigger" data-video="MRDhIeUwsvU">Demo Video</button>
 								<a href="https://github.com/SilasRopp1012/inbox-summarizer" class="project-link" target="_blank">GitHub</a>
 							</div>
 						</div>
@@ -161,7 +161,7 @@
 								<span class="tech-tag">Tailwind CSS</span>
 							</div>
 							<div class="project-links">
-								<a href="https://youtu.be/0h8rHrOByX8" class="project-link" target="_blank">Demo Video</a>
+								<button class="project-link video-trigger" data-video="0h8rHrOByX8">Demo Video</button>
 								<a href="https://github.com/SilasRopp1012/sealion" class="project-link" target="_blank">GitHub</a>
 							</div>
 						</div>
@@ -887,12 +887,12 @@
 			document.addEventListener('DOMContentLoaded', function() {
 				const videoModal = document.getElementById('video-modal');
 				const videoIframe = document.getElementById('video-iframe');
-				const videoTrigger = document.querySelector('.video-trigger');
+				const videoTriggers = document.querySelectorAll('.video-trigger'); // Changed to querySelectorAll
 				const videoClose = document.querySelector('.video-close');
 
-				// Open video modal
-				if (videoTrigger) {
-					videoTrigger.addEventListener('click', function() {
+				// Open video modal for all video triggers
+				videoTriggers.forEach(trigger => {
+					trigger.addEventListener('click', function() {
 						const videoId = this.getAttribute('data-video');
 						if (videoId) {
 							videoIframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1`;
@@ -900,7 +900,7 @@
 							document.body.style.overflow = 'hidden'; // Prevent background scrolling
 						}
 					});
-				}
+				});
 
 				// Close video modal
 				function closeVideo() {
